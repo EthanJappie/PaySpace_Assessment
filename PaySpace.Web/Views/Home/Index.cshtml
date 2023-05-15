@@ -1,0 +1,57 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="w-50 mb-3">
+
+
+    @{
+        if (Model is not null)
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Postal Code</th>
+                        <th scope="col">Income</th>
+                        <th scope="col">Rate</th>
+                        <th scope="col">Tax Amount</th>
+                        <th scope="col">Calc Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td scope="row">@item.PostalCode</td>
+                            <td scope="row">@item.AnnualIncome</td>
+                            <td scope="row">@item.AppliedRate</td>
+                            <td scope="row">@item.TaxAmount</td>
+                            <td scope="row">@item.CalculationDate</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <div>No Records</div>
+        }
+    }
+
+
+
+
+</div>
+<div class="w-25">
+    <form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="TaxCalculation">
+        <div class="form-group">
+            <label for="postalCode">Postal Code</label>
+            <input type="text" id="postalCode" class="form-control" name="PostalCode" required />
+        </div>
+        <div class="form-group">
+            <label for="annualIncome">Annual Income</label>
+            <input type="number" class="form-control" id="annualIncome" name="AnnualIncome" required />
+        </div>
+        <button type="submit" class="btn btn-primary mt-2">Submit</button>
+    </form>
+</div>
